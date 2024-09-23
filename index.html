@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="head">Madaka</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1 class="titulo">¡Bienvenido a cotizar con Madaka sublimaciones!</h1>
+    <h4>¡Recuerde que esto es un aproximado! Por promociones pueden variar los precios!</h4>
+
+    <!-- Contenedor para centrar el contenido excepto los títulos -->
+    <div class="container">
+        <label for="opcions">Selecciona un producto:</label>
+        <select class="selec" id="opcions" name="opcions" onchange="mostrarOpciones()">
+            <option class="selec" value="">--Selecciona--</option>
+            <option class="selec" value="mugs">Mugs</option>
+            <option class="selec" value="camisetas">Camisetas</option>
+            <option class="selec" value="termos">Termos</option>
+        </select>
+
+        <!-- Menú de mugs -->
+        <div id="opciones-mugs" style="display:none;">
+            <label for="tipoMug">Selecciona el tipo de mug que deseas:</label>
+            <select class="selec" id="tipoMug">
+                <option class="selec" value="mug_blanco">Mug blanco</option>
+                <option class="selec" value="mug_magico">Mug mágico</option>
+                <option class="selec" value="mug_fondo">Mug con fondo interno</option>
+                <option class="selec" value="mug_corazon">Mug con oreja de corazón</option>
+            </select>
+        </div>
+
+        <!-- Menú de camisetas -->
+        <div id="opciones-camisetas" style="display:none;">
+            <label for="tipocamiseta">Selecciona el tipo de camiseta que deseas:</label>
+            <select class="selec" id="tipocamiseta">
+                <option class="selec" value="camiseta_durazno">Camiseta piel de durazno</option>
+                <option class="selec" value="camiseta_algodon">Camiseta en algodón</option>
+            </select>
+        </div>
+
+        <!-- Menú de termos -->
+        <div id="opciones-termos" style="display:none;">
+            <label for="tipotermo">Selecciona el tipo de Termo que deseas:</label>
+            <select class="selec" id="tipotermo">
+                <option class="selec" value="termo_digital">Termo digital</option>
+            </select>
+        </div>
+
+        <input class="cantidad" type="number" placeholder="Digite Cuantos desea" id="cantidad">
+        <button class="boton" onclick="cotizacion()">Enviar</button>
+    </div>
+</body>
+</html>
+
+
+
+    
+<script>
+
+
+// Constantes
+const mg_bl = 3500; // Mug blanco 
+const mg_fd = 4300; // Mug con fondo 
+const mg_o_cora = 7000; // Mug oreja de corazón con fondo
+const mg_mg = 5800; // Mug mágico
+
+const cm_dz = 6500; // Camiseta piel durazno 
+const cm_al = 20000; // Camiseta en algodón 
+
+const t_dg = 20000; // Termo
+
+
+function fijo() {
+    return 6000 + 1000 + 5000; // Total fijo: 12,000 pesos
+}
+
+
+// Mostrar los menús según el producto seleccionado
+function mostrarOpciones() {
+    const input = document.getElementById("opcions").value;
+
+    if (input === "mugs") {
+        document.getElementById("opciones-mugs").style.display = "block"; // Muestra el  menú para mugs
+    } else {
+        document.getElementById("opciones-mugs").style.display = "none"; // Oculta el menú si selecciona otro producto
+    }
+
+    if (input === "camisetas") {
+        document.getElementById("opciones-camisetas").style.display = "block"; // Muestra el  menú para camisetas
+    } else {
+        document.getElementById("opciones-camisetas").style.display = "none"; // Oculta el menú si selecciona otro producto
+    }
+
+    if (input === "termos") {
+        document.getElementById("opciones-termos").style.display = "block"; // Muestra el  menú para termos
+    } else {
+        document.getElementById("opciones-termos").style.display = "none"; // Oculta el menú si selecciona otro producto
+    }
+}
+
+
+
+
+function cotizacion() {
+    const cantidad = document.getElementById("cantidad").value;  
+    const selectedProduct = document.getElementById("opcions").value;  
+    let total = 0;
+
+//----------------------------------Cotizacion de mugs--------------------------------------------------
+    if (selectedProduct === "mugs") {
+        const selectedMug = document.getElementById("tipoMug").value;
+
+        if (selectedMug === "mug_blanco") {
+            total = mg_bl + fijo();
+            total = total * cantidad
+            alert("Costo del Mug Blanco: $" + total);
+        } else if (selectedMug === "mug_magico") {
+            total = mg_mg + fijo();
+            total = total * cantidad
+            alert("Costo del Mug Mágico: $" + total);
+        } else if (selectedMug === "mug_fondo") {
+            total = mg_fd + fijo();
+            total = total * cantidad
+            alert("Costo del Mug con Fondo Interno: $" + total);
+        } else if (selectedMug === "mug_corazon") {
+            total = mg_o_cora + fijo();
+            total = total * cantidad
+            alert("Costo del Mug con Oreja de Corazón: $" + total);
+        } else {
+            alert("Selecciona un tipo de mug válido.");
+        }
+//----------------------------------Fin Cotizacion de mugs--------------------------------------------------//
+
+
+//---------------------------------Cotizacion de camisetas--------------------------------------------------//
+    } else if (selectedProduct === "camisetas") {
+        const selectedcamiseta = document.getElementById("tipocamiseta").value;
+        if (selectedcamiseta == "camiseta_durazno") {
+            total = cm_dz + fijo();
+            total = total * cantidad
+            alert("Costo de la Camiseta Piel Durazno: $" + total);
+        } else if (selectedcamiseta == "camiseta_algodon"){
+            total = cm_al + fijo ();
+            total = total * cantidad
+            alert ("El costo de la(s) camiseta(s) en Algodon es: $" + total)
+        }    
+  
+ //-------------------------------Fin Cotizacion de camisetas--------------------------------------------------//       
+
+//--------------------------------Cotizacion de Termos---------------------------------------------------------//
+    } else if (selectedProduct === "termos") {
+        const selectedtermo = document.getElementById("tipotermo").value;
+        if (selectedtermo === "termo_digital")
+        total = t_dg + fijo();
+        total = total * cantidad
+        alert("Costo del Termo: $" + total);
+    } else {
+        alert("Selecciona un producto válido.");
+    }
+
+//------------------------------Fin Cotizacion de Termos---------------------------------------------------------//
+
+}
+
+    </script>
+</body>
+</html>
